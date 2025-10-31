@@ -54,11 +54,9 @@ Returned JSON (task mode) fields:
 	- Resolve library IDs; fetch version-specific docs & API usage excerpts (Context7 MCP).
 6. **Perform Deep Research:**
 	- Sequential reasoning on performance, security, extensibility, pitfalls.
-7. **Load Technology Gotchas:**
-	- Apply Conditional Gotcha Loading Strategy (see `copilot-instructions.md` / "Conditional Gotcha Loading Strategy").
-	- Always include core set; add layer / technology / context sets only when their detection triggers fire (if layer ambiguous → include frontend + backend best practices by rule).
-	- Produce a Gotchas Table (File | Category: Core/Layer/Tech/Context | Trigger | Mapped Task Sequences | Mitigation Status).
-	- Do NOT load technology-specific gotchas (React / .NET) without explicit detection evidence; treat any violation as a risk entry.
+7. **Context Pattern Detection:**
+	- Detect layers (frontend/backend/database/integration) & technologies; list ambiguities and potential risks.
+	- Map detections to cross-cutting concerns emphasis (security, performance, accessibility, observability).
 8. **Define Confirmation Gate Strategy:**
 	- Prepare plan & tasks; insert confirmation block; defer file writes.
 9. **Map Task Generation Blueprint:**
@@ -86,7 +84,7 @@ Returned JSON (task mode) fields:
 9. Cross-Cutting Concerns (Security, Performance, Observability, Accessibility)
 10. Risks, Assumptions & Open Questions
 11. Confirmation Gate Instructions
-12. Appendices (Doc references, Gotchas, Version Pins)
+12. Appendices (Doc references, Version Pins)
 
 ## Requirements Decomposition Table
 Provide table columns: ID | Requirement Snippet | Impacted Areas | Proposed Task Sequences | Notes.
@@ -123,7 +121,7 @@ All blueprint fields MUST map to the concrete sections in `task_template.md` whe
 | Data workflow | Entity / API / event flow (omit with note if N/A) |
 | Impacted Components | Group Inputs/Outputs by layer stack (FE/BE/DB/etc.) |
 | Implementation Plan (<Layer>) | Layer-specific actionable steps referencing files & test updates |
-| References / External References | Version-pinned docs, internal file anchors, gotcha links |
+| References / External References | Version-pinned docs, internal file anchors |
 | Implementation Validation Strategy | Lint, unit, integration, e2e, performance, accessibility criteria |
 | ToDo Task | Checklist (all unchecked) mirroring decomposition atomic steps |
 
@@ -143,7 +141,6 @@ Do NOT generate actual task files here—only the structured plan.
 - Show exact task-mode invocation for each proposed task
 - Use lowercase directories under `tasks` (`us_<id>` or `general`) in examples
 - Represent every `task_template.md` section or mark with justified `_Not applicable_`
-- Provide Gotchas Table with triggers & mappings; no unauthorized technology-specific gotchas loaded; unmitigated High/Critical items appear in Risks (use sequences, no prefix).
 
 
 ## Error Handling

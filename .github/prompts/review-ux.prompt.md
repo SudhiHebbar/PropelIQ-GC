@@ -44,8 +44,8 @@ Returned JSON keys (expected): `repo_root`, `docs_dir` (if design docs), `tasks_
 	- Create timestamp `YYYYMMDD_HHMMSS` for stable file naming.
 6. **Optional Design Reference Loading**
 	- If `figma_design` provided: classify (URL vs local). Outline pixel comparison plan.
-7. **Eight-Phase UX Review Execution & Gotchas Integration** (Phases 0–7)
-	- Technology Gotchas: Apply Conditional Gotcha Loading Strategy (see `copilot-instructions.md`). Always load core set; add layer / technology / context sets only when detection triggers fire (ambiguous layer → include frontend + backend). Produce GotchasApplied table (File | Category | Trigger | Phase Impact | Mitigation Status). Flag any High/Critical unmitigated gotcha as a risk.
+7. **Eight-Phase UX Review Execution & Context Integration** (Phases 0–7)
+	- Context Detection: Identify UI-relevant technologies & layers; produce ContextApplied table (File | Layer/Tech | Trigger | Phase Impact | Mitigation Status). Flag any High/Critical unmitigated issue as a risk.
 	- Phase 0: Preparation & Playwright setup (analyze changed files; map feature areas).
 	- Phase 1: Interaction & User Flows (primary + alternate paths; form validation; state transitions).
 	- Phase 2: Responsive Behavior (desktop 1440px, tablet 768px, mobile 375px; breakpoint issues, overflow, layout shifts).
@@ -127,7 +127,7 @@ Examples: `checkout_mobile_alignment_20251026_142233.png`, `header_desktop_focus
 - No placeholder tokens (TBD / ??? / $ARGUMENTS) remain in final output.
 - Risk section lists at least top 3 items (unless <3 issues total).
 - Timestamps used consistently across filenames and report reference.
- - GotchasApplied table present; no unauthorized technology-specific gotchas; High/Critical guidance items either mitigated or listed in Risks.
+ - ContextApplied table present; High/Critical guidance items either mitigated or listed in Risks.
 
 ## Error Handling
 | Condition | Action | Status |

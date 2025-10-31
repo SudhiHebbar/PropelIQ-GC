@@ -65,7 +65,7 @@ for (let k = 0; k < vertices; k++) {
 const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 ```
 
-**API Constraints or Gotchas**
+**API Constraints & Caveats**
 ```javascript
 // Good: Explains external constraint
 // GitHub API rate limit: 5000 requests/hour for authenticated users

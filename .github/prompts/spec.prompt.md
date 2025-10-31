@@ -54,11 +54,10 @@ Transform a scope (file path or direct text) into a comprehensive, business‑al
 	- Identify architecture patterns (layered, modular monolith, services) and constraints (DB engines, cloud hints).
 	- If no code detected (greenfield) plan epic `EP-TECH`.
 
-6. **Gotcha Loading Strategy**
-	- Apply Conditional Gotcha Loading Strategy (see `copilot-instructions.md` / "Conditional Gotcha Loading Strategy").
-	- Always include core set; add layer / technology / context sets only when their detection triggers fire (if layer ambiguous → include frontend + backend best practices by rule).
-	- Produce a Gotchas Table (File | Category: Core/Layer/Tech/Context | Trigger | Mapped Task IDs | Mitigation Status).
-	- Do NOT load technology-specific gotchas (React / .NET) without explicit detection evidence; treat any violation as a risk entry.
+6. **Context Pattern Detection**
+	- Detect relevant layers (frontend, backend, database, integration) and technologies from repository scan and scope text.
+	- Map detections to requirement emphasis (e.g., UI → accessibility, performance; backend → resilience, security; database → migration, integrity).
+	- List detected layers/technologies and any ambiguity as risks or clarification items (avoid speculative loading of non-detected tech).
 
 7. **Deep Requirements Analysis (Use Sequential Thinking MCP)**
 	1. Business Context & Objectives (stakeholders, goals, KPIs, value hypotheses).
@@ -164,18 +163,6 @@ Transform a scope (file path or direct text) into a comprehensive, business‑al
 11. Open Design Questions
 
 ## Success Criteria
-- 100% Mandatory Sections present & ordered (conditional sections properly noted).
-- Unique zero-padded IDs; no collisions.
-- All non-ambiguous requirements have acceptance criteria or validation linkage.
-- Every clear requirement appears in Traceability Matrix (1 row each, documented exceptions).
-- `[UNCLEAR]` requirements only in Clarification Queue (not in epics or traceability).
-- Epics contain success metrics & mapped requirement IDs.
-- Quality Assessment table populated (no placeholders).
-- No file writes prior to explicit YES confirmation.
-- `designsystem.md` only if UI impact flagged.
-- Gotchas Table present if any conditional gotchas loaded; absence justified otherwise.
-- Risk severities include impact & likelihood qualifiers.
-- Greenfield scenario includes EP-TECH epic.
 
 ## Error Handling
 
@@ -186,10 +173,8 @@ Transform a scope (file path or direct text) into a comprehensive, business‑al
 | Extraction failure (PDF/DOCX) | Request alternate format | `EXTRACTION_FAILED` |
 | Text too brief | Request augmentation | `INPUT_TOO_BRIEF` |
 | No derivable requirements | Ask for elaboration | `INSUFFICIENT_SCOPE` |
-| Gotcha load failure | Continue; note degradation | `DEGRADED_GOTCHAS` |
 | UI asset referenced but inaccessible | Add risk entry | `DESIGN_ASSET_MISSING` |
 
-## Constraints
 - Read-only until confirmation.
 - No speculative technology commitments absent in input or repository indicators.
 - Deterministic ordering (alphabetical where not priority/sequence-based).
@@ -198,7 +183,7 @@ Transform a scope (file path or direct text) into a comprehensive, business‑al
 
 ## Output Formatting Rules
 - All top-level sections use level 2 markdown headings: ##
-- Tables for: Gotchas, Requirements (if tabular subsets), Traceability, Risks, Constraints, Assumptions, Quality Scores.
+-- Tables for: Requirements (if tabular subsets), Traceability, Risks, Constraints, Assumptions, Quality Scores.
 - IDs: ALL-CAPS prefix + dash + zero-padded 3-digit sequence.
 - Wrap file paths & tokens in backticks.
 - Line length target ≤120 chars.
@@ -233,7 +218,6 @@ AWAITING USER CONFIRMATION: Reply YES to write spec.md (and designsystem.md if a
 | Quality Scores | All metrics populated | 8 filled | Placeholder / missing | Scan for X / placeholders |
 | Confirmation Gate | Present pre-write | Exactly once | Absent/multiple | Regex confirm |
 | Ambiguity Isolation | [UNCLEAR] only in queue | Strict | Leakage elsewhere | Search outside queue |
-| Gotchas Strategy | Conditional loads justified | All triggers valid | Unauthorized loads | Validate trigger list |
 
 ## Self-Check Procedure (Pre-Display)
 1. Enumerate generated section headings → verify full ordered list.

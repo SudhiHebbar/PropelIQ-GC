@@ -12,7 +12,7 @@ $ARGUMENTS
 `$ARGUMENTS` may be a feature file path, user story text, spec excerpt, or left empty. If empty, fallback to existing `spec.md` and `codeanalysis.md`.
 
 ## Purpose
-Produce a context-rich architectural & implementation design at `.propel/context/docs/design.md` using `.github/templates/design_template.md`, integrating internal codebase patterns, external library references, gotchas, validation strategies, and iterative improvement scoring. Do NOT overwrite an existing `design.md` wholesale—update only relevant sections after confirmation.
+Produce a context-rich architectural & implementation design at `.propel/context/docs/design.md` using `.github/templates/design_template.md`, integrating internal codebase patterns, external library references, validation strategies, and iterative improvement scoring. Do NOT overwrite an existing `design.md` wholesale—update only relevant sections after confirmation.
 
 ## Scripts
 sh: .github/scripts/bash/setup-design.sh --json
@@ -38,11 +38,10 @@ ps: .github/scripts/powershell/setup-design.ps1 -Json
 6. **External Library & Framework Research**
 	- Resolve library IDs (Use Context7 MCP). Fetch minimal doc excerpts (APIs, version differences).
 	- Capture constraints (deprecated APIs, performance caveats).
-7. **Gotcha Loading Strategy**
-	- Apply Conditional Gotcha Loading Strategy (see `copilot-instructions.md` / "Conditional Gotcha Loading Strategy").
-	- Always include core set; add layer / technology / context sets only when their detection triggers fire (if layer ambiguous → include frontend + backend best practices by rule).
-	- Produce a Gotchas Table (File | Category: Core/Layer/Tech/Context | Trigger | Mapped Task IDs | Mitigation Status).
-	- Do NOT load technology-specific gotchas (React / .NET) without explicit detection evidence; treat any violation as a risk entry.
+7. **Context Pattern Detection**
+	- Identify layers (frontend, backend, database) & technologies from input + repository scan.
+	- Record detected patterns; ambiguities become clarification items or risks.
+	- Avoid speculative inclusion of non-detected technologies.
 8. **Sequential Deep Reasoning Pass**
 	- Use sequential-thinking MCP (if available) to evaluate design hypotheses: architecture layering → data flow → error boundaries → performance & scaling → security posture → testability.
 	- Fallback: manual structured reasoning blocks.
@@ -74,7 +73,7 @@ ps: .github/scripts/powershell/setup-design.ps1 -Json
 3. UI Impact & Design Context (omit with note if none)
 4. Codebase Pattern & Convention Summary
 5. External Libraries & Version Pins
-6. Gotchas & Constraints Overview
+6. Constraints Overview
 7. Architecture Goals & Rationale
 8. Technology Stack & Validation
 9. Style & Naming Guidelines
@@ -85,7 +84,7 @@ ps: .github/scripts/powershell/setup-design.ps1 -Json
 14. Confirmation Gate Instructions
 15. Post-Confirmation Actions & Scoring Plan
 16. Assumptions & Limitations
-17. Appendices (Doc excerpts, file lists, gotcha triggers)
+17. Appendices (Doc excerpts, file lists)
 
 ## Success Criteria
 - All mandatory sections present & ordered.
@@ -116,7 +115,7 @@ ps: .github/scripts/powershell/setup-design.ps1 -Json
 
 ## Output Formatting Rules
 - Use level-2 headings for all mandatory sections.
-- Tables for risks, version pins, gotchas.
+- Tables for risks, version pins.
 - Wrap file paths in backticks.
 - Use `_Not applicable (reason)._` for omitted conditional sections.
 - No placeholder tokens (`$ARGUMENTS`) remain in final output.

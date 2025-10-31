@@ -87,8 +87,6 @@ Layer-specific actionable steps referencing files & tests.
 - Related tasks: (list)
 ### External References
 - [Doc / Spec / API] (URL) – purpose summary
-### Gotchas Applied
-- (Gotcha:ID) → Explanation of mitigation
 
 ## Implementation Validation Strategy
 Define concrete validation gates:

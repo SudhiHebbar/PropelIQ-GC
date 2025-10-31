@@ -34,7 +34,7 @@ Implement the referenced task file completely and safely: load context, plan gra
 3. **Load Core Context Docs:**
 	- Read (if present): `${docs_dir}/spec.md`, `${docs_dir}/design.md`, `${docs_dir}/designsystem.md`, `${docs_dir}/codeanalysis.md`.
 	- Summarize constraints, domain rules, design tokens, and code analysis insights.
-	- Load Technology Gotchas: Apply Conditional Gotcha Loading Strategy (see `copilot-instructions.md`). Always load core set; add layer / technology / context sets only if detection triggers fire (ambiguous layer → include frontend + backend). Produce LoadedGotchas table (File | Category | Trigger | Mitigation Status). Do NOT load React/.NET gotchas without explicit trigger; treat any violation or unmitigated High/Critical item as risk.
+	- Context Pattern Detection: Identify relevant layers/technologies from changed files; emphasize associated cross-cutting concerns (security, performance, accessibility).
 
 4. **UI Design Integration (Conditional):**
 	- If task mentions UI / component / page / styling → load `${docs_dir}/designstyle.md` (Figma links / images / tokens) and/or `${docs_dir}/designsystem.md` if present.
@@ -53,7 +53,7 @@ Implement the referenced task file completely and safely: load context, plan gra
 	- PLAN: Run `mcp__sequential_thinking__plan` to materialize verification checklist from acceptance criteria & NFRs.
 	- CRITIQUE: Run Run `mcp__sequential_thinking__critique` to map evidence (files, tests, endpoints) to each checklist item (Pass/Gap/Fail).
 	- REFLECT: Run `mcp__sequential_thinking__reflect` to summarize risks, produce fix list & missing tests.
-	- Integrate Gotchas: For each applicable gotcha, add a checklist entry or link mitigation (prevent repeating known pitfalls). Flag any unmitigated gotcha as a risk candidate.
+	- Integrate Cross-Cutting Concerns: Add checklist entries for performance, security, accessibility, and observability items relevant to detected layers; flag any High/Critical gaps as risks.
 
 8. **Iterative Implementation:**
 	- For each planned step: implement code following existing patterns (naming, structure).
@@ -125,7 +125,7 @@ Implement the referenced task file completely and safely: load context, plan gra
 - External adaptation evidence recorded (source & rationale) for any incorporated external logic.
  - Baseline build executed and passed prior to any implementation steps (or justified NA if project has no build concept).
  - Mid-process build failures resolved before subsequent steps (no unchecked BUILD_FAIL events at completion gate).
- - Technology gotchas loaded per strategy with LoadedGotchas table; no unauthorized tech-specific entries; unmitigated High/Critical items appear in Risk Register.
+ - Context detections enumerated; cross-cutting concern checklist populated; unmitigated High/Critical items appear in Risk Register.
 
 ## Scripts
 sh: .github/scripts/bash/setup-implement.sh --json

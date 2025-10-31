@@ -30,7 +30,7 @@ Produces a structured Review Report ONLY (no code changes) with actionable findi
 	- Resolve actual changed files via git diff (range or heuristic: last N commits touching those paths).
 3. **Load Supplemental Context**
 	- Read `.propel/context/docs/spec.md`, `design.md`, `designsystem.md`, `codeanalysis.md` if present; summarize constraints & design tokens; record missing.
-	- Load Technology Gotchas: Reconstruct expected set using Conditional Gotcha Loading Strategy (see `copilot-instructions.md`) based on changed files + task declarations. Always include core; add layer / technology / context sets only when triggers fire (ambiguous layer → frontend + backend). Capture ExpectedGotchas & LoadedGotchas tables (File | Category | Trigger). Flag unauthorized tech-specific loads or missing expected items.
+	- Context Pattern Detection: Derive expected layer/technology set from changed files + task declarations. Capture ExpectedContext vs DetectedContext tables (Layer/Tech | Trigger Evidence). Flag missing expected domains or unjustified additions.
 
 4. **Execution Evidence Correlation**
 	- Map each acceptance criterion & checklist item to concrete evidence: file lines, test names, commit hashes.
@@ -41,7 +41,7 @@ Produces a structured Review Report ONLY (no code changes) with actionable findi
 
 6. **Architecture & Pattern Conformance**
 	- Compare changes against architecture cues from `codeanalysis.md` (layering, boundaries, coupling hotspots). Flag divergences.
-	- Evaluate adherence to Technology Gotchas: produce GotchaDelta table (MissingExpected | UnjustifiedLoaded). Record mitigations or justifications.
+	- Evaluate context alignment: produce ContextDelta table (MissingExpected | UnjustifiedDetected) with mitigation or justification notes.
 
 7. **Risk & Regression Assessment**
 	- Identify potential regressions (API signature changes, removed validations, performance hotspots, error handling gaps).
@@ -106,7 +106,7 @@ Metric Notes:
 - OriginalCodeCompliance validated (no unexplained large pasted blocks).
 - Clear PASS / CONDITIONAL PASS / FAIL verdict with criteria.
 - No placeholder tokens (TBD / ??? / placeholder / `$ARGUMENTS`).
- - Technology Gotchas compliance: expected vs loaded reconciled (no MissingExpected without remediation; no UnjustifiedLoaded); deviations justified.
+ - Context detection compliance: expected vs detected reconciled (no MissingExpected without remediation; no UnjustifiedDetected); deviations justified.
 
 ## Error Handling
 

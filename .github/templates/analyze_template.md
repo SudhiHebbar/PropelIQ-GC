@@ -9,7 +9,7 @@ Template for comprehensive codebase analysis and reverse engineering documentati
 2. **Stakeholder Alignment**: Provide both executive summaries and technical deep-dives
 3. **Actionable Insights**: Include prioritized recommendations with effort estimates
 4. **Quality Assessment**: Validate findings with metrics and confidence levels
-5. **Global Rules**: Follow all guidelines in CLAUDE.md and References/Gotchas
+5. **Global Rules**: Follow all applicable repository instruction guidelines
 
 ---
 
